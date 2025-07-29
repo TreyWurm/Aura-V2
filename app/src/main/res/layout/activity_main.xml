@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
@@ -17,99 +18,121 @@
         >
 
         <Button
-            android:id="@+id/btnBernhard"
+            android:id="@+id/btnExport"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Bernhard"
+            android:text="Export"
+            app:layout_constraintTop_toTopOf="parent"
             />
 
-        <Button
-            android:id="@+id/btnCerne"
+
+        <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Cerne"
-            />
+            android:layout_marginTop="@dimen/spacing_double"
+            android:alignmentMode="alignMargins"
+            android:columnCount="2"
+            android:rowCount="6"
+            android:useDefaultMargins="true"
+            app:layout_constraintTop_toBottomOf="@id/btnExport"
+            >
 
-        <Button
-            android:id="@+id/btnElli"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Elli"
-            />
+            <Button
+                android:id="@+id/btnBernhard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="Bernhard"
+                />
 
-        <Button
-            android:id="@+id/btnFabi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Fabi"
-            />
+            <Button
+                android:id="@+id/btnCerne"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="Cerne"
+                />
 
-        <Button
-            android:id="@+id/btnKo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Ko"
-            />
+            <Button
+                android:id="@+id/btnElli"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="Elli"
+                />
 
-        <Button
-            android:id="@+id/btnKrissi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Krissi"
-            />
+            <Button
+                android:id="@+id/btnFabi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="Fabi"
+                />
 
-        <Button
-            android:id="@+id/btnMale"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Male"
-            />
+            <Button
+                android:id="@+id/btnKo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="Ko"
+                />
 
-        <Button
-            android:id="@+id/btnMichi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Michi"
-            />
+            <Button
+                android:id="@+id/btnKrissi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="Krissi"
+                />
 
-        <Button
-            android:id="@+id/btnNiklas"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Niklas"
-            />
+            <Button
+                android:id="@+id/btnMale"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="Male"
+                />
 
-        <Button
-            android:id="@+id/btnPeter"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Peter"
-            />
+            <Button
+                android:id="@+id/btnMichi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="Michi"
+                />
 
-        <Button
-            android:id="@+id/btnSusi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Susi"
-            />
+            <Button
+                android:id="@+id/btnNiklas"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="Niklas"
+                />
 
-        <Button
-            android:id="@+id/btnTrevor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Trevor"
-            />
+            <Button
+                android:id="@+id/btnPeter"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="Peter"
+                />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/btnSusi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="Susi"
+                />
+
+            <Button
+                android:id="@+id/btnTrevor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:text="Trevor"
+                />
+        </GridLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

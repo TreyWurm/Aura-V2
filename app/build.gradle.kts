@@ -1,15 +1,17 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.hilt)
+    id("kotlin-kapt")
+    id("kotlin-parcelize")
 }
-
 android {
     namespace = "at.nukular.aura"
     compileSdk = 36
 
     defaultConfig {
         applicationId = "at.nukular.aura"
-        minSdk = 24
+        minSdk = 30
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -23,27 +25,49 @@ android {
         viewBinding = true
     }
 
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = false
+        }
     }
-    kotlinOptions {
-        jvmTarget = "11"
+
+    kotlin {
+        jvmToolchain(21)
     }
 }
 
 dependencies {
-
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
+    // Android
+    implementation(libs.android.x.core)
+    implementation(libs.appcompat)
     implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+
+    // Arrow
+    implementation(libs.kotlin.arrow.core)
+    implementation(libs.kotlin.arrow.coroutines)
+
+    // FlexibleAdapter
+    implementation(libs.android.flexible.adapter)
+
+    // Hilt
+    implementation(libs.android.hilt)
+    kapt(libs.android.hilt.kapt)
+
+    // Koin
+    implementation(libs.kotlin.koin.android)
+
+    // Ktor
+    implementation(libs.ktor.client.content.negotiation)
+    implementation(libs.ktor.client.logging)
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.okhttp)
+    implementation(libs.ktor.serialization.json)
+
+    // Timber
+    implementation(libs.android.timber)
 }
