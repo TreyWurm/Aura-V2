@@ -16,7 +16,9 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),
+    ProceedListener,
+    TischlerListener {
 
     @Inject
     lateinit var fileWriterReader: FileWriterReader
@@ -44,23 +46,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initListeners() {
-        binding.btnExport.setOnClickListener {
-            try {
-                val file = fileWriterReader.writeEntriesToFile() ?: return@setOnClickListener
-                if (file.exists()) {
-                    val uri = fileProvider.getUriForFile(file)
-                    val intent = Intent(Intent.ACTION_SEND)
-                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                    intent.setType("*/*")
-                    intent.putExtra(Intent.EXTRA_STREAM, uri)
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent)
-                }
-            } catch (e: java.lang.Exception) {
-                e.printStackTrace()
-            }
-        }
-
+        binding.btnExport.setOnClickListener { TischlerDialogFragment.startFragment(this) }
         binding.btnBernhard.setOnClickListener { onTischlerClicked(Tischler.BERNHARD) }
         binding.btnCerne.setOnClickListener { onTischlerClicked(Tischler.CERNE) }
         binding.btnElli.setOnClickListener { onTischlerClicked(Tischler.ELLI) }
@@ -77,6 +63,27 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun onTischlerClicked(tischler: Tischler) {
+        ConfirmDialogFragment.startFragment(this, tischler)
+    }
+
+    override fun confirmMe(tischler: Tischler) {
+        try {
+            val file = fileWriterReader.writeEntriesToFile(tischler)
+            if (file.exists()) {
+                val uri = fileProvider.getUriForFile(file)
+                val intent = Intent(Intent.ACTION_SEND)
+                intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                intent.setType("*/*")
+                intent.putExtra(Intent.EXTRA_STREAM, uri)
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent)
+            }
+        } catch (e: java.lang.Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    override fun confirmTischler(tischler: Tischler) {
         fileWriterReader.addEntry(LocalDateTime.now(), tischler)
     }
 }

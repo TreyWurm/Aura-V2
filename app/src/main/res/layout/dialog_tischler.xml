@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<at.nukular.core.ui.views.roundedlayouts.layouts.RoundedConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:rl_radius="16dp"
+    >
+
+    <at.nukular.core.ui.views.TextView
+        android:id="@+id/tvText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_normal"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="Das bin ich"
+        android:textSize="@dimen/text_size_large"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_normal"
+        android:layout_marginTop="@dimen/spacing_half"
+        android:layout_marginEnd="@dimen/spacing_normal"
+        android:layout_marginBottom="@dimen/spacing_normal"
+        android:alignmentMode="alignMargins"
+        android:columnCount="2"
+        android:rowCount="6"
+        android:useDefaultMargins="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvText"
+        >
+
+        <Button
+            android:id="@+id/btnBernhard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="Bernhard"
+            />
+
+        <Button
+            android:id="@+id/btnCerne"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="Cerne"
+            />
+
+        <Button
+            android:id="@+id/btnElli"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="Elli"
+            />
+
+        <Button
+            android:id="@+id/btnFabi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="Fabi"
+            />
+
+        <Button
+            android:id="@+id/btnKo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="Ko"
+            />
+
+        <Button
+            android:id="@+id/btnKrissi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="Krissi"
+            />
+
+        <Button
+            android:id="@+id/btnMale"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="Male"
+            />
+
+        <Button
+            android:id="@+id/btnMichi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="Michi"
+            />
+
+        <Button
+            android:id="@+id/btnNiklas"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="Niklas"
+            />
+
+        <Button
+            android:id="@+id/btnPeter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="Peter"
+            />
+
+        <Button
+            android:id="@+id/btnSusi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="Susi"
+            />
+
+        <Button
+            android:id="@+id/btnTrevor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_columnWeight="1"
+            android:text="Trevor"
+            />
+    </GridLayout>
+
+</at.nukular.core.ui.views.roundedlayouts.layouts.RoundedConstraintLayout>

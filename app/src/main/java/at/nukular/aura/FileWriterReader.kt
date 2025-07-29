@@ -5,17 +5,20 @@ import android.os.storage.StorageManager
 import androidx.core.text.isDigitsOnly
 import at.nukular.core.extensions.size
 import dagger.hilt.android.qualifiers.ApplicationContext
+import org.json.JSONArray
+import org.json.JSONObject
 import timber.log.Timber
 import java.io.File
 import java.io.FileOutputStream
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 import javax.inject.Singleton
 
 
 private const val DIR_NAME = "logs"
 private const val MAX_LOG_DIR_SIZE = 1_000_000L * 2 // 2MB == ~9k log entries
-private const val CSV_FILE_NAME = "export.csv"
+private const val JSON_FILE_NAME = "export.json"
 private const val CURRENT_FILE_NAME = "current"
 private const val BACKUP_FILE_NAME = "current.backup"
 
@@ -72,30 +75,26 @@ class FileWriterReader @Inject constructor(
         }
     }
 
-    fun writeEntriesToFile(): File? {
-        val newFile = File(dataDir, CSV_FILE_NAME)
-        var dataWritten = false
+    fun writeEntriesToFile(tischler: Tischler): File {
+        val newFile = File(dataDir, JSON_FILE_NAME)
+
+        val json = JSONObject()
+        json.put("submitted_by", tischler.string)
+        val array = JSONArray()
+        entries.forEach { entry ->
+            val tischler = JSONObject()
+            tischler.put("name", entry.key.string)
+            tischler.put("times", JSONArray(entry.value.map { dateTime ->
+                JSONObject()
+                    .put("date", DateTimeFormatter.ISO_LOCAL_DATE.format(dateTime))
+                    .put("time", DateTimeFormatter.ofPattern("HH:mm").format(dateTime))
+            }))
+            array.put(tischler)
+        }
+        json.put("Stammtischler", array)
 
         newFile.bufferedWriter().use { writer ->
-            entries.forEach { entry ->
-                try {
-                    writer.appendLine("# ============================================================")
-                    writer.appendLine(entry.key.string)
-                    writer.appendLine("# ============================================================")
-                    entry.value.forEach { writer.appendLine(it.toString()) }
-                    writer.appendLine()
-                    writer.appendLine()
-
-                    dataWritten = true
-                } catch (e: Exception) {
-                    Timber.w("Error writing Entry to file. $e")
-                }
-            }
-        }
-
-        if (!dataWritten) {
-            newFile.delete()
-            return null
+            writer.write(json.toString())
         }
 
         return newFile
